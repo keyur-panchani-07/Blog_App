@@ -75,7 +75,10 @@ export async function POST(request) {
 ========================= */
 export async function DELETE(request) {
   try {
-    const id = request.nextUrl.searchParams.get("id");
+    // const id = request.nextUrl.searchParams.get("id");
+
+    const { searchParams } = new URL(request.url);
+const id = searchParams.get("id");
 
     const blog = await BlogModel.findById(id);
     if (!blog) {
