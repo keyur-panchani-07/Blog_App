@@ -4,12 +4,13 @@ import { ConnectDB } from "@/lib/config/db";
 import BlogModel from "@/lib/models/BlogModel";
 import cloudinary from "@/lib/config/cloudinary";
 
-await ConnectDB();
+// await ConnectDB();
 
 /* =========================
    GET BLOGS
 ========================= */
 export async function GET(request) {
+  await ConnectDB();
   const blogId = request.nextUrl.searchParams.get("id");
 
   if (blogId) {
@@ -25,6 +26,7 @@ export async function GET(request) {
    POST BLOG
 ========================= */
 export async function POST(request) {
+  await ConnectDB();
   try {
     const formData = await request.formData();
     const imageFile = formData.get("image");
@@ -74,6 +76,7 @@ export async function POST(request) {
    DELETE BLOG
 ========================= */
 export async function DELETE(request) {
+  await ConnectDB();
   try {
     // const id = request.nextUrl.searchParams.get("id");
 
