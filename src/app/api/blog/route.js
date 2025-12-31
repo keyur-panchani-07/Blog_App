@@ -1,3 +1,4 @@
+export const runtime = "nodejs";
 import { NextResponse } from "next/server";
 import { ConnectDB } from "@/lib/config/db";
 import BlogModel from "@/lib/models/BlogModel";
@@ -37,7 +38,9 @@ export async function POST(request) {
 
     const bytes = await imageFile.arrayBuffer();
     const buffer = Buffer.from(bytes);
-    const base64Image = `data:${imageFile.type};base64,${buffer.toString("base64")}`;
+    const base64Image = `data:${imageFile.type};base64,${buffer.toString(
+      "base64"
+    )}`;
 
     const uploadResult = await cloudinary.uploader.upload(base64Image, {
       folder: "nextjs-blogs",
@@ -88,9 +91,6 @@ export async function DELETE(request) {
     return NextResponse.json({ msg: "Blog Deleted" });
   } catch (error) {
     console.error(error);
-    return NextResponse.json(
-      { msg: "Delete failed" },
-      { status: 500 }
-    );
+    return NextResponse.json({ msg: "Delete failed" }, { status: 500 });
   }
 }
